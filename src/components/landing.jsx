@@ -2,6 +2,29 @@ import React, { useState, useRef, useEffect } from "react";
 import "./landing.css";
 import Plus from "../assets/plus.png";
 
+
+const HeaderComponent = () => {
+  return (<div className="header_main">
+    <div className="headerFont">To-Do APP</div>
+    <div className="inputContainer">
+      <input
+        placeholder="Search Task"
+        name="Search"
+        className="inputBox"
+      />
+    </div>
+  </div>);
+};
+
+const TaskComponent = ({ list = [] }) => {
+  return (<div className="main_body">
+    {list.map((el, index) => (<div key={el + index} className="task_detail">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+    </div>))}
+  </div>);
+}
+
+
 export default function landing() {
   const [isOpen, setIsopen] = useState(false);
   const ref = useRef();
@@ -26,51 +49,41 @@ export default function landing() {
 
     document.addEventListener("click", clickedOutside);
     return () => {
-      document.removeEventListener("click", clickedOutside);
+      document.removeEventListener("click", () => { });
     };
   }, [isOpen]);
-
+  const list = Array(50).fill(Math.random());
   return (
     <>
-      <div className="foundation_class">
-        <div className="header_main">
-          <div className="headerFont">To-Do APP</div>
-          <div className="inputContainer">
-            <input
-              placeholder="Search Task"
-              name="Search"
-              className="inputBox"
-            />
-          </div>
-        </div>
-        <div className="main_body">
-          <div className="task_detail"> Stufffffffffff</div>
-          <div className="task_detail"> Stufffffffffff</div>
-          <div className="task_detail"> Stufffffffffff</div>
-          <div className="task_detail"> Stufffffffffff</div>
-        </div>
+      {/* <div className="foundation_class"> */}
+      <HeaderComponent />
+      <TaskComponent list={list} />
 
-        <button className="addButton" onClick={handleModal} ref={addref}>
-          <img style={{ width: 40, height: 40 }} src={Plus} alt="Add Task" />
-        </button>
+      <div className="footer">
+        Footer
 
-        <div className="footer">Footer</div>
+        <div className="addButton">
+          <button onClick={handleModal} ref={addref}>
+            <img style={{ width: 40, height: 40 }} src={Plus} alt="Add Task" />
+          </button>
+        </div>
       </div>
+      {/* </div> */}
 
       {isOpen ? (
         <div className="modalBase">
+          <button className="addButton_inner" onClick={handleModal}>
+            Add
+          </button>
           <div className="addTaskModal" ref={ref}>
             <div className="taskModalHeading">Add Your Task</div>
-            <div className="inputContainer">
+            <div className="inputContainer_modal">
               <input
                 placeholder="Type your Task"
                 name="Add Task"
                 className="inputBox"
               />
             </div>
-            <button className="addButton" onClick={handleModal}>
-              Add
-            </button>
           </div>
         </div>
       ) : null}

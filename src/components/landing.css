@@ -2,90 +2,154 @@
   background-color: #010f32;
 }
 
-.foundation_class {
+/* .foundation_class {
   display: flex;
   color: #f8fefe;
   background-color: #010f32;
   text-align: center;
   width: 100%;
+} */
 
-  .header_main {
-    display: flex;
-    position: absolute;
-    flex-direction: column;
-    top: 0px;
-    height: 30%;
-    width: 90%;
-    margin: 0% 4.75%;
-    background-color: #172957;
-    justify-content: space-around;
-    border-radius: 0px 0px 40px 40px;
-  }
+/* .header_main {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  top: 0px;
+  height: 30%;
+  width: 90%;
+  margin: 0% 4.75%;
+  background-color: #172957;
+  justify-content: space-around;
+  border-radius: 0px 0px 40px 40px;
+} */
 
-  .headerFont {
-    font-family: Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 35px;
-    line-height: 44px;
-  }
-
-  .main_body {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 40%;
-    align-items: center;
-    width: 100%;
-    min-height: 15%;
-    max-height: 35%;
-    overflow-y: scroll;
-
-    .task_detail {
-      background-color: #172957;
-      width: 400px;
-      padding: 12px;
-      margin: 15px 0px;
-      color: #f8fefe;
-      overflow-wrap: break-word;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      border-radius: 20px;
-    }
-  }
-
-  .main_body::-webkit-scrollbar {
-    display: none;
-  }
-
-  .addButton {
-    position: absolute;
-    right: 7%;
-    bottom: 18%;
-    border: 1px solid var(--border-dark-info, #eff6fd);
-    border-radius: 50%;
-    padding: 4px;
-    z-index: 0;
-    background-color: #010f32;
-    img {
-      width: 45px;
-      height: 45px;
-    }
-  }
-
-  .footer {
-    display: flex;
-    position: absolute;
-    bottom: 0px;
-    height: 12%;
-    width: 90%;
-    margin: 0% 4.75%;
-    justify-content: center;
-    background-color: #172957;
-    border-radius: 40px 40px 0px 0px;
-  }
+.header_main {
+  text-align: center;
+  /* content center*/
+  width: 80%;
+  margin: 0 auto;
+  /* container/box center */
+  padding: 2% 0;
+  background-color: #172957;
+  border-radius: 0px 0px 40px 40px;
 }
 
+.headerFont {
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 44px;
+  margin-bottom: 3%;
+}
+
+.main_body {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  max-height: 500px !important;
+  /* background-color: red; */
+  overflow-y: scroll;
+  border-radius: 10px;
+}
+
+.main_body>.task_detail {
+  width: 70%;
+  background-color: brown;
+  margin: 2% auto;
+  border-radius: 10px;
+  /* text-align: right; */
+}
+
+/* .main_body {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 40%;
+  align-items: center;
+  width: 100%;
+  min-height: 15%;
+  max-height: 35%;
+  overflow-y: scroll;
+
+  .task_detail {
+    background-color: #172957;
+    width: 400px;
+    padding: 12px;
+    margin: 15px 0px;
+    color: #f8fefe;
+    overflow-wrap: break-word;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+  }
+} */
+
+/* .main_body::-webkit-scrollbar {
+  display: none;
+} */
+
+/* .addButton {
+  position: absolute;
+  right: 7%;
+  bottom: 18%;
+  border: 1px solid var(--border-dark-info, #eff6fd);
+  border-radius: 50%;
+  padding: 4px;
+  z-index: 0;
+  background-color: #010f32;
+
+  img {
+    width: 45px;
+    height: 45px;
+  }
+} */
+
+
 .modalBase {
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  height: 100%;
+  max-height: 200px;
+  width: 100%;
+  max-width: 500px;
+  background: rgba(18, 32, 61, 0.6);
+}
+
+.addTaskModal {
+  text-align: center;
+  /* margin: 25% auto; */
+  position: relative;
+}
+
+.taskModalHeading {
+  font-size: 22px;
+  margin-top: 5px;
+}
+
+.inputContainer_modal {
+  width: 50%;
+  margin: 10% auto;
+}
+
+.inputContainer_modal>input {
+  width: 100%;
+  font-size: 23px;
+  outline: none;
+  /* margin: 20px auto; */
+}
+
+.addButton_inner {
+  position: absolute;
+  top: 70%;
+  left: 45%;
+  /* position: absolute;
+top: 10px;
+left: 45%; */
+}
+
+
+/* .modalBase {
   position: absolute;
   display: flex;
   background: rgba(18, 32, 61, 0.6);
@@ -94,6 +158,7 @@
   width: 100vw;
   height: 100vh;
   top: 0;
+
   .addTaskModal {
     display: flex;
     padding: 3.5% 13%;
@@ -105,6 +170,7 @@
     background: var(--background-dark-container-box, #172957);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     z-index: 0;
+
     .taskModalHeading {
       color: var(--text-dark-heading-title, #f8fefe);
       text-align: center;
@@ -114,6 +180,7 @@
       line-height: 30px;
     }
   }
+
   .addButton {
     display: flex;
     background-color: transparent;
@@ -126,23 +193,70 @@
     color: #f8fefe;
     border: 1px solid var(--text-dark-heading-title, #f8fefe);
   }
+} */
+
+.inputContainer {
+  /* display: flex; */
+  /* justify-content: center; */
 }
 
 .inputContainer {
-  display: flex;
-  justify-content: center;
-  .inputBox {
-    display: flex;
-    padding: 11px 28px;
-    color: #5d70ac;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 18px;
-    font-family: Inter;
-    font-weight: 500;
-    border: none;
-    border-radius: 200px;
-    background: var(--background-dark-input, #010f32);
-  }
+  width: 30%;
+  margin: 0 auto;
+  /* width: 100%; */
+}
+
+.inputContainer>input {
+  width: 100%;
+  font-size: 22px;
+  outline: none;
+  color: #5d70ac;
+  border: none;
+  padding: 5%;
+  border-radius: 12px;
+  background: var(--background-dark-input, #010f32);
+  /* border-radius: 10%; */
+  /* background-color: red; */
+  /* border-radius: 200px; */
+}
+
+/* .inputBox {
+      display: flex;
+      padding: 11px 28px;
+      color: #5d70ac;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 18px;
+      font-family: Inter;
+      font-weight: 500;
+      border: none;
+      border-radius: 200px;
+      background: var(--background-dark-input, #010f32);
+    } */
+
+
+.footer {
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+  font-size: 2rem;
+  position: relative;
+  /* padding: 2% 0; */
+  /* display: flex;
+  position: absolute;
+  bottom: 0px;
+  height: 12%;
+  width: 90%;
+  margin: 0% 4.75%;
+  justify-content: center; */
+  background-color: #172957;
+  border-radius: 40px 40px 0px 0px;
+}
+
+
+.addButton {
+  position: absolute;
+  top: -93px;
+  right: 27px;
 }
