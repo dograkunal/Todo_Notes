@@ -1,7 +1,9 @@
 import Landing from "./components/landing";
+import { Counter } from "./reduxExample/Counter";
 
 function App() {
   return <Landing />;
+  // return <Counter />;
 }
 
 export default App;

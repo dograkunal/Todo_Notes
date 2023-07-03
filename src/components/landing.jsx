@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./landing.css";
+import "./landing.scss";
 import Plus from "../assets/plus.png";
 
 export default function landing() {
