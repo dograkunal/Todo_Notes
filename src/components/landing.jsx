@@ -6,6 +6,7 @@ export default function landing() {
   const [isOpen, setIsopen] = useState(false);
   const ref = useRef();
   const addref = useRef();
+  const list = Array(10).fill(Math.random());
 
   const handleModal = () => {
     isOpen ? setIsopen(false) : setIsopen(true);
@@ -32,29 +33,16 @@ export default function landing() {
 
   return (
     <>
-      <div className="foundation_class">
-        <div className="header_main">
-          <div className="headerFont">To-Do APP</div>
-          <div className="inputContainer">
-            <input
-              placeholder="Search Task"
-              name="Search"
-              className="inputBox"
-            />
-          </div>
-        </div>
-        <div className="main_body">
-          <div className="task_detail"> Stufffffffffff</div>
-          <div className="task_detail"> Stufffffffffff</div>
-          <div className="task_detail"> Stufffffffffff</div>
-          <div className="task_detail"> Stufffffffffff</div>
-        </div>
+      {/* <div className="foundationClass"> */}
+      <HeaderComponent />
+      <TaskComponent list={list} />
 
-        <button className="addButton" onClick={handleModal} ref={addref}>
+      <div className="footer">Footer</div>
+
+      <div>
+        {/* <button className="addButton" onClick={handleModal} ref={addref}>
           <img style={{ width: 40, height: 40 }} src={Plus} alt="Add Task" />
-        </button>
-
-        <div className="footer">Footer</div>
+        </button> */}
       </div>
 
       {isOpen ? (
@@ -77,3 +65,28 @@ export default function landing() {
     </>
   );
 }
+
+const TaskComponent = ({ list }) => {
+  return (
+    <div className="mainBody">
+      {list.map((el, index) => (
+        <div className="taskDetail" key={el + index}>
+          Lorem Ipsum has been the industry's standard dummy text ever since the
+          1500s, when an unknown printer took a galley of type and scrambled it
+          to make a type specimen book.
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const HeaderComponent = () => {
+  return (
+    <div className="headerMain">
+      <div className="headerFont">To-Do APP</div>
+      <div className="inputContainer">
+        <input placeholder="Search Task" name="Search" className="inputBox" />
+      </div>
+    </div>
+  );
+};
