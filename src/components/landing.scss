@@ -2,6 +2,69 @@
   background-color: #010f32;
   color: rgb(247, 248, 248);
 }
+.foundationClass {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+
+  .addButton {
+    display: flex;
+    position: absolute;
+    bottom: 13%;
+    right: 12%;
+    background-color: transparent;
+    width: 5%;
+    padding: 12px 6px;
+    justify-content: center;
+    // align-items: center;
+    // color: #f8fefe;
+    border-radius: 200px;
+    border: 1px solid #f8fefe;
+    img {
+      width: 70%;
+    }
+  }
+
+  .modalBase {
+    display: flex;
+    position: absolute;
+    background: rgba(18, 32, 61, 0.6);
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    .addTaskModal {
+      display: flex;
+      padding: 3.5% 13%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 45px;
+      border-radius: 40px;
+      background: #172957;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      z-index: 0;
+      .taskModalHeading {
+        color: #f8fefe;
+        text-align: center;
+        font-size: 22px;
+        font-family: Inter;
+        font-weight: 500;
+        line-height: 30px;
+      }
+      button {
+        background-color: transparent;
+        width: 85%;
+        color: #f8fefe;
+        border: 1px solid #f8fefe;
+        border-radius: 20px;
+      }
+    }
+  }
+}
 
 .headerMain {
   display: flex;
@@ -25,18 +88,27 @@
   width: 50%;
   margin: 17px auto;
   text-align: center;
-  // background-color: red;
-  max-height: 400px;
+  // max-height: 400px;
   overflow-y: scroll;
   .taskDetail {
+    display: flex;
     background-color: #172957;
-    width: 60%;
     padding: 10px;
     margin: 15px auto;
     color: #f8fefe;
+    align-items: center;
     overflow-wrap: break-word;
+    border-radius: 25px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
+    justify-content: space-between;
+
+    button {
+      background-color: transparent;
+      border: none;
+    }
+    p {
+      padding: 2px;
+    }
   }
 }
 .mainBody::-webkit-scrollbar {
@@ -48,17 +120,16 @@
   margin: 0 auto;
   text-align: center;
   background-color: #172957;
-  padding: 2% 0%;
+  padding: 1.75% 5%;
   border-radius: 40px 40px 0px 0px;
 }
 
 .inputContainer {
   display: flex;
   justify-content: center;
-  padding: 1% 0%;
   .inputBox {
     display: flex;
-    padding: 5% 12%;
+    padding: 5% 10%;
     color: #5d70ac;
     text-align: center;
     font-size: 18px;
