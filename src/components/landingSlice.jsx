@@ -10,15 +10,15 @@ export const ToDoSlice = createSlice({
   initialState,
   reducers: {
     addTask: (state, action) => {
-      [
-        console.log(...state, action.payload),
-
+      return [
+        ...state,
         {
           task: action.payload,
           done: false,
         },
       ];
     },
+
     deleteTask: (state, action) => ({
       ...state,
       task: state.task.filter((data) => data.id !== action.payload),
