@@ -10,23 +10,25 @@ export default function landing() {
   const [isOpen, setIsopen] = useState(false);
   const ref = useRef();
   const addref = useRef();
-  const taskToDo = useSelector((state) => state && state.ToDoTask);
+  const taskToDo = useSelector(
+    (state) => state && state.ToDoTask && state.ToDoTask.notes
+    // && state.ToDoTask.tasks
+  );
 
   const dispatch = useDispatch();
   const [localTask, setLocalTask] = useState();
-  // const list = Array(5).fill(Math.random());
   const handleModal = () => {
     isOpen ? setIsopen(false) : setIsopen(true);
   };
 
-  function handleDeleteTodo() {
-    // setTodos(todos.filter((data) => data.id !== todoId));
-    dispatch(deleteTask());
+  function handleDeleteTodo(i) {
+    dispatch(deleteTask(i));
   }
 
   function handleAddToDo() {
     dispatch(addTask(localTask));
     handleModal();
+    setLocalTask(" ");
   }
 
   useEffect(() => {
@@ -75,7 +77,6 @@ export default function landing() {
                 }}
               />
             </div>
-            {/* <button onClick={() => dispatch(addTask(localTask))}> */}
             <button onClick={handleAddToDo}>Add Task</button>
           </div>
         </div>
@@ -85,24 +86,30 @@ export default function landing() {
 }
 
 const TaskComponent = ({ taskToDo, handleDeleteTodo }) => {
+  console.log(taskToDo, "Task");
   return (
     <div className="mainBody">
-      {taskToDo.map((el, index) => (
-        <div className="taskDetail" key={el + index}>
-          <div>
-            <button>
-              <img src={DoneIC} alt="Task Done" />
-            </button>
+      {taskToDo &&
+        taskToDo.map((el, index) => (
+          <div className="taskDetail" key={el + index}>
+            <div>
+              <button>
+                <img src={DoneIC} alt="Task Done" />
+              </button>
+            </div>
+            <p>{el.task}</p>
+            <div>
+              <button>
+                <img
+                  src={DeleteIC}
+                  onClick={() => handleDeleteTodo(el.task)}
+                  // onClick={() => handleDeleteTodo(el)}
+                  alt="Task Done"
+                />
+              </button>
+            </div>
           </div>
-          {/* <p> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </p> */}
-          <p>{el.task}</p>
-          <div>
-            <button>
-              <img src={DeleteIC} onClick={handleDeleteTodo} alt="Task Done" />
-            </button>
-          </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 };
