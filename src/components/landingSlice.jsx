@@ -2,8 +2,8 @@ import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   notes: [
-    { task: "Buy milk", done: false },
-    { task: "Have Whey", done: false },
+    { id: 555, task: "Buy milk", done: false },
+    { id: 444, task: "Have Whey", done: false },
   ],
 };
 
@@ -17,20 +17,12 @@ export const ToDoSlice = createSlice({
   initialState,
   reducers: {
     addTask: (state, action) => {
-      // console.log(current(state.notes));
-      // return [
-      //   ...state.notes,
-      //   {
-      //     task: action.payload,
-      //     done: false,
-      //   },
-      // ];
-
       return {
         ...state,
         notes: [
           ...state.notes,
           {
+            id: Math.floor(Math.random() * 1000),
             task: action.payload,
             done: false,
           },
@@ -46,18 +38,12 @@ export const ToDoSlice = createSlice({
 
     deleteTask: (state, action) => {
       console.log(current(state.notes), "Reducer");
-      console.log(...state.notes.filter((data) => data !== action.payload));
       return {
         ...state,
-        notes: [
-          ...state.notes,
-          {},
-          // [action.field]: [...state.notes[action.field]].filter(
-          //   (x, index) => index !== action.payload
-          // ),
-        ],
+        notes: [...state.notes.filter((item) => item.id !== action.payload)],
       };
 
+      // state.filter((item) => item.id !== action.payload);
       // Method 2
       // return {
       //   tasks: [...state.tasks.filter((data) => data !== action.payload)],

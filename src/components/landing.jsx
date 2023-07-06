@@ -102,7 +102,7 @@ const TaskComponent = ({ taskToDo, handleDeleteTodo }) => {
               <button>
                 <img
                   src={DeleteIC}
-                  onClick={() => handleDeleteTodo(el.task)}
+                  onClick={() => handleDeleteTodo(el.id)}
                   // onClick={() => handleDeleteTodo(el)}
                   alt="Task Done"
                 />
