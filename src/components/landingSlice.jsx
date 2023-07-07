@@ -37,20 +37,23 @@ export const ToDoSlice = createSlice({
     },
 
     deleteTask: (state, action) => {
-      console.log(current(state.notes), "Reducer");
+      // console.log(current(state.notes), "Reducer");
       return {
         ...state,
         notes: [...state.notes.filter((item) => item.id !== action.payload)],
       };
 
-      // state.filter((item) => item.id !== action.payload);
       // Method 2
       // return {
       //   tasks: [...state.tasks.filter((data) => data !== action.payload)],
       // };
     },
+
+    editTask: (state, action) => {
+      console.log(current(state), "Edit Reducer");
+    },
   },
 });
 
-export const { deleteTask, addTask } = ToDoSlice.actions;
+export const { deleteTask, addTask, editTask } = ToDoSlice.actions;
 export default ToDoSlice.reducer;

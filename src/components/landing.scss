@@ -18,8 +18,6 @@
     width: 5%;
     padding: 12px 6px;
     justify-content: center;
-    // align-items: center;
-    // color: #f8fefe;
     border-radius: 200px;
     border: 1px solid #f8fefe;
     img {
@@ -37,6 +35,7 @@
     height: 100vh;
     top: 0;
     .addTaskModal {
+      position: relative;
       display: flex;
       padding: 3.5% 13%;
       flex-direction: column;
@@ -47,6 +46,14 @@
       background: #172957;
       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
       z-index: 0;
+
+      .closeModal {
+        position: absolute;
+        top: 8%;
+        right: 8%;
+        width: 2px;
+        border: none;
+      }
       .taskModalHeading {
         color: #f8fefe;
         text-align: center;
@@ -88,6 +95,7 @@
   width: 50%;
   margin: 17px auto;
   text-align: center;
+  min-height: 427px;
   // max-height: 400px;
   overflow-y: scroll;
   .taskDetail {
@@ -105,6 +113,8 @@
     button {
       background-color: transparent;
       border: none;
+      padding: 6px;
+      color: #f8fefe;
     }
     p {
       padding: 2px;

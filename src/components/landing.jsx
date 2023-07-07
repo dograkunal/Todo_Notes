@@ -1,23 +1,30 @@
 import React, { useState, useRef, useEffect } from "react";
+import ModalComponent from "./modalComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteTask, addTask } from "./landingSlice";
 import Plus from "../assets/plus.png";
 import DoneIC from "../assets/Done.png";
 import DeleteIC from "../assets/Remove.png";
+import { HiOutlinePencil } from "react-icons/hi2";
+
 import "./landing.scss";
 
 export default function landing() {
   const [isOpen, setIsopen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [localTask, setLocalTask] = useState(" ");
   const ref = useRef();
   const addref = useRef();
   const taskToDo = useSelector(
     (state) => state && state.ToDoTask && state.ToDoTask.notes
-    // && state.ToDoTask.tasks
   );
 
   const dispatch = useDispatch();
-  const [localTask, setLocalTask] = useState();
+
   const handleModal = () => {
+    if (editOpen) {
+      setIsopen(true);
+    }
     isOpen ? setIsopen(false) : setIsopen(true);
   };
 
@@ -26,9 +33,13 @@ export default function landing() {
   }
 
   function handleAddToDo() {
-    dispatch(addTask(localTask));
-    handleModal();
-    setLocalTask(" ");
+    if (localTask === " ") {
+      alert("This cannot be Empty");
+    } else {
+      dispatch(addTask(localTask));
+      handleModal();
+      setLocalTask(" ");
+    }
   }
 
   useEffect(() => {
@@ -53,7 +64,13 @@ export default function landing() {
   return (
     <div className="foundationClass">
       <HeaderComponent />
-      <TaskComponent taskToDo={taskToDo} handleDeleteTodo={handleDeleteTodo} />
+      <TaskComponent
+        taskToDo={taskToDo}
+        handleDeleteTodo={handleDeleteTodo}
+        editOpen={editOpen}
+        setEditOpen={setEditOpen}
+        handleModal={handleModal}
+      />
 
       <div className="footer">Footer</div>
 
@@ -64,29 +81,55 @@ export default function landing() {
       </div>
 
       {isOpen ? (
-        <div className="modalBase">
-          <div className="addTaskModal" ref={ref}>
-            <div className="taskModalHeading">Add Your Task</div>
-            <div className="inputContainer">
-              <input
-                placeholder="Type your Task"
-                className="inputBox"
-                value={localTask}
-                onChange={(e) => {
-                  setLocalTask(e.target.value);
-                }}
-              />
-            </div>
-            <button onClick={handleAddToDo}>Add Task</button>
-          </div>
-        </div>
+        <ModalComponent
+          // ref={ref}
+          handler={handleAddToDo}
+          value={localTask}
+          onChangeValue={setLocalTask}
+          editOpen={editOpen}
+        />
       ) : null}
+      {/* {editOpen >
+      (
+        <ModalComponent
+          ref={ref}
+          handler={handleEditToDo}
+          value={localTask}
+          setLocalTask={setLocalTask}
+        />
+      )} */}
     </div>
   );
 }
 
-const TaskComponent = ({ taskToDo, handleDeleteTodo }) => {
-  console.log(taskToDo, "Task");
+const TaskComponent = ({
+  taskToDo,
+  handleDeleteTodo,
+  setEditOpen,
+  handleModal,
+  editOpen,
+}) => {
+  function handleEditToDo() {}
+
+  function editModal(el) {
+    // console.log(el);
+    setEditOpen(true);
+    handleModal();
+
+    return (
+      <>
+        {editOpen ? (
+          <ModalComponent
+            handler={handleEditToDo}
+            value={el.task}
+            editOpen={editOpen}
+            onChangeValue={() => {}}
+          />
+        ) : null}
+      </>
+    );
+  }
+
   return (
     <div className="mainBody">
       {taskToDo &&
@@ -99,11 +142,18 @@ const TaskComponent = ({ taskToDo, handleDeleteTodo }) => {
             </div>
             <p>{el.task}</p>
             <div>
+              <button
+                onClick={() => {
+                  editModal(el);
+                }}
+              >
+                <HiOutlinePencil />
+                Edit
+              </button>
               <button>
                 <img
                   src={DeleteIC}
                   onClick={() => handleDeleteTodo(el.id)}
-                  // onClick={() => handleDeleteTodo(el)}
                   alt="Task Done"
                 />
               </button>
