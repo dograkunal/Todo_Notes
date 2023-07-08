@@ -50,23 +50,41 @@ export const ToDoSlice = createSlice({
     },
 
     editTask: (state, action) => {
-      console.log(current(state.notes), "Edit Reducer");
-      const editedValue = action.payload;
+      console.log(
+        current(state.notes),
+        action.payload.id,
+        action.payload.value,
+        "Edit Reducer"
+      );
       debugger;
-      let newEditTodo = {
-        ...state,
-        notes: [...state.notes.filter((item) => item.task)],
-      };
-      console.log(newEditTodo, "Edit");
-      return {
-        // ...state,
-        // notes: [
-        //   ...state.notes,
-        //   {
-        //     task: action.payload,
-        //   },
-        // ],
-      };
+      // let newEditTodo = {
+      //   ...state.notes.find((item) => item.id === action.payload.id),
+      // };
+      // console.log(newEditTodo, "Edit");
+      // if (newEditTodo) {
+      //   return {
+      //     ...state,
+      //     notes: [
+      //       ...state.notes,
+      //       {
+      //         task: action.payload.value,
+      //       },
+      //     ],
+      //   };
+      // } else {
+      //   return {
+      //     ...state,
+      //   };
+      // }
+      return state.notes.map((data) => {
+        if (data.id === action.payload.id) {
+          return {
+            ...state,
+            notes: [...state.notes, { task: action.payload.value }],
+          };
+        }
+        return data;
+      });
     },
   },
 });

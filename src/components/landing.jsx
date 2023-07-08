@@ -130,11 +130,15 @@ const HeaderComponent = () => {
 
 function TaskManipulator({ el, index, handleDeleteTodo }) {
   const [editing, setEditing] = useState(false);
+  // const [editData, setEditData] = useState(el.task);
   const dispatch = useDispatch();
 
+  debugger;
   const handleChange = (e) => {
-    dispatch(editTask(e.target.value));
-    console.log(e.target.value);
+    //dikkat yha hai !
+    let data = { id: el.id, value: e.target.value };
+    dispatch(editTask(data));
+    console.log(el.id, e.target.value, "Line 137");
   };
 
   let todoManipulation;
@@ -142,7 +146,10 @@ function TaskManipulator({ el, index, handleDeleteTodo }) {
     console.log(editing, "Editing True");
     todoManipulation = (
       <>
-        <input value={el.task} onChange={(e) => handleChange(e)} />
+        <input
+          value={el.task}
+          onChange={(e) => handleChange({ ...el.task, task: e.target.value })}
+        />
         <button onClick={() => setEditing(false)}>
           <HiMiniArrowDownTray />
           Save
