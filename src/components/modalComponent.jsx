@@ -1,37 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function modalComponent({
   ref,
   handler,
-  value,
+  modalValue,
   onChangeValue,
   editOpen,
 }) {
-  // console.log(value, "Value");
+  console.log(modalValue, "Value modal line 10");
   return (
     <div className="modalBase">
       <div className="addTaskModal" ref={ref}>
         <div className="taskModalHeading">Add Your Task</div>
         <div className="inputContainer">
-          {!editOpen ? (
-            <input
-              className="inputBox"
-              name="Task"
-              value={value}
-              onChange={(e) => {
-                onChangeValue(e.target.value);
-              }}
-            />
-          ) : (
-            <input
-              className="inputBox"
-              name="Task"
-              value={value}
-              onChange={(e) => {
-                console.log(e);
-              }}
-            />
-          )}
+          <input
+            className="inputBox"
+            name="Task"
+            value={modalValue}
+            onChange={(e) => {
+              onChangeValue(...modalValue, e.target.value);
+            }}
+          />
         </div>
         <button onClick={handler}>Submit Task</button>
       </div>

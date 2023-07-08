@@ -22,6 +22,7 @@ export default function landing() {
   const dispatch = useDispatch();
 
   const handleModal = () => {
+    console.log(editOpen, "Edit open", isOpen, "Is Open");
     if (editOpen) {
       setIsopen(true);
     }
@@ -71,33 +72,22 @@ export default function landing() {
         setEditOpen={setEditOpen}
         handleModal={handleModal}
       />
-
       <div className="footer">Footer</div>
-
       <div>
         <button className="addButton" onClick={handleModal} ref={addref}>
           <img src={Plus} alt="Add Task" />
         </button>
       </div>
 
-      {isOpen ? (
+      {isOpen && !editOpen ? (
         <ModalComponent
           // ref={ref}
           handler={handleAddToDo}
-          value={localTask}
+          modalValue={localTask}
           onChangeValue={setLocalTask}
           editOpen={editOpen}
         />
       ) : null}
-      {/* {editOpen >
-      (
-        <ModalComponent
-          ref={ref}
-          handler={handleEditToDo}
-          value={localTask}
-          setLocalTask={setLocalTask}
-        />
-      )} */}
     </div>
   );
 }
@@ -109,23 +99,28 @@ const TaskComponent = ({
   handleModal,
   editOpen,
 }) => {
-  function handleEditToDo() {}
+  const [editting, setEdit] = useState();
+
+  function handleEditToDo() {
+    console.log(editting);
+  }
 
   function editModal(el) {
-    // console.log(el);
     setEditOpen(true);
+    editComponent(el);
     handleModal();
+  }
 
+  function editComponent(el) {
+    console.log(el.task, "Element editComponent");
     return (
       <>
-        {editOpen ? (
-          <ModalComponent
-            handler={handleEditToDo}
-            value={el.task}
-            editOpen={editOpen}
-            onChangeValue={() => {}}
-          />
-        ) : null}
+        <ModalComponent
+          handler={handleEditToDo}
+          modalValue={el.task}
+          editOpen={editOpen}
+          onChangeValue={setEdit}
+        />
       </>
     );
   }
