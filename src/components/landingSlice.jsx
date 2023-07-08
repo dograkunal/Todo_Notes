@@ -50,7 +50,23 @@ export const ToDoSlice = createSlice({
     },
 
     editTask: (state, action) => {
-      console.log(current(state), "Edit Reducer");
+      console.log(current(state.notes), "Edit Reducer");
+      const editedValue = action.payload;
+      debugger;
+      let newEditTodo = {
+        ...state,
+        notes: [...state.notes.filter((item) => item.task)],
+      };
+      console.log(newEditTodo, "Edit");
+      return {
+        // ...state,
+        // notes: [
+        //   ...state.notes,
+        //   {
+        //     task: action.payload,
+        //   },
+        // ],
+      };
     },
   },
 });

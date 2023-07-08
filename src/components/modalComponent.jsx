@@ -5,7 +5,6 @@ export default function modalComponent({
   handler,
   modalValue,
   onChangeValue,
-  editOpen,
 }) {
   console.log(modalValue, "Value modal line 10");
   return (
@@ -18,7 +17,7 @@ export default function modalComponent({
             name="Task"
             value={modalValue}
             onChange={(e) => {
-              onChangeValue(...modalValue, e.target.value);
+              onChangeValue(e.target.value);
             }}
           />
         </div>

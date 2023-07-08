@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import ModalComponent from "./modalComponent";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTask, addTask } from "./landingSlice";
+import { deleteTask, addTask, editTask } from "./landingSlice";
 import Plus from "../assets/plus.png";
 import DoneIC from "../assets/Done.png";
 import DeleteIC from "../assets/Remove.png";
-import { HiOutlinePencil } from "react-icons/hi2";
+import { HiOutlinePencil, HiMiniArrowDownTray } from "react-icons/hi2";
 
 import "./landing.scss";
 
@@ -22,7 +22,7 @@ export default function landing() {
   const dispatch = useDispatch();
 
   const handleModal = () => {
-    console.log(editOpen, "Edit open", isOpen, "Is Open");
+    console.log(editOpen);
     if (editOpen) {
       setIsopen(true);
     }
@@ -72,20 +72,22 @@ export default function landing() {
         setEditOpen={setEditOpen}
         handleModal={handleModal}
       />
+
       <div className="footer">Footer</div>
+
       <div>
         <button className="addButton" onClick={handleModal} ref={addref}>
           <img src={Plus} alt="Add Task" />
         </button>
       </div>
 
-      {isOpen && !editOpen ? (
+      {isOpen ? (
         <ModalComponent
           // ref={ref}
           handler={handleAddToDo}
           modalValue={localTask}
           onChangeValue={setLocalTask}
-          editOpen={editOpen}
+          // editOpen={editOpen}
         />
       ) : null}
     </div>
@@ -99,61 +101,17 @@ const TaskComponent = ({
   handleModal,
   editOpen,
 }) => {
-  const [editting, setEdit] = useState();
-
-  function handleEditToDo() {
-    console.log(editting);
-  }
-
-  function editModal(el) {
-    setEditOpen(true);
-    editComponent(el);
-    handleModal();
-  }
-
-  function editComponent(el) {
-    console.log(el.task, "Element editComponent");
-    return (
-      <>
-        <ModalComponent
-          handler={handleEditToDo}
-          modalValue={el.task}
-          editOpen={editOpen}
-          onChangeValue={setEdit}
-        />
-      </>
-    );
-  }
-
   return (
     <div className="mainBody">
       {taskToDo &&
         taskToDo.map((el, index) => (
-          <div className="taskDetail" key={el + index}>
-            <div>
-              <button>
-                <img src={DoneIC} alt="Task Done" />
-              </button>
-            </div>
-            <p>{el.task}</p>
-            <div>
-              <button
-                onClick={() => {
-                  editModal(el);
-                }}
-              >
-                <HiOutlinePencil />
-                Edit
-              </button>
-              <button>
-                <img
-                  src={DeleteIC}
-                  onClick={() => handleDeleteTodo(el.id)}
-                  alt="Task Done"
-                />
-              </button>
-            </div>
-          </div>
+          <span key={el.id}>
+            <TaskManipulator
+              el={el}
+              index={index}
+              handleDeleteTodo={handleDeleteTodo}
+            />
+          </span>
         ))}
     </div>
   );
@@ -169,3 +127,56 @@ const HeaderComponent = () => {
     </div>
   );
 };
+
+function TaskManipulator({ el, index, handleDeleteTodo }) {
+  const [editing, setEditing] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    dispatch(editTask(e.target.value));
+    console.log(e.target.value);
+  };
+
+  let todoManipulation;
+  if (editing) {
+    console.log(editing, "Editing True");
+    todoManipulation = (
+      <>
+        <input value={el.task} onChange={(e) => handleChange(e)} />
+        <button onClick={() => setEditing(false)}>
+          <HiMiniArrowDownTray />
+          Save
+        </button>
+      </>
+    );
+  } else {
+    todoManipulation = (
+      <>
+        <p>{el.task}</p>
+        <button onClick={() => setEditing(true)}>
+          <HiOutlinePencil />
+          Edit
+        </button>
+      </>
+    );
+  }
+  return (
+    <div className="taskDetail" key={el + index}>
+      <div>
+        <button>
+          <img src={DoneIC} alt="Task Done" />
+        </button>
+      </div>
+      <div className="taskDisplay">
+        {todoManipulation}
+        <button>
+          <img
+            src={DeleteIC}
+            onClick={() => handleDeleteTodo(el.id)}
+            alt="Task Done"
+          />
+        </button>
+      </div>
+    </div>
+  );
+}
