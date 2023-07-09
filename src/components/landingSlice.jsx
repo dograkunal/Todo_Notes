@@ -60,24 +60,17 @@ export const ToDoSlice = createSlice({
       // let newEditTodo = {
       //   ...state.notes.find((item) => item.id === action.payload.id),
       // };
-      // console.log(newEditTodo, "Edit");
+
       // if (newEditTodo) {
       //   return {
       //     ...state,
-      //     notes: [
-      //       ...state.notes,
-      //       {
-      //         task: action.payload.value,
-      //       },
-      //     ],
-      //   };
-      // } else {
-      //   return {
-      //     ...state,
+      //     notes: [ ...state.notes,{task: action.payload.value}],
       //   };
       // }
+
       return state.notes.map((data) => {
         if (data.id === action.payload.id) {
+          console.log(data.id === action.payload.id, "Edit");
           return {
             ...state,
             notes: [...state.notes, { task: action.payload.value }],
