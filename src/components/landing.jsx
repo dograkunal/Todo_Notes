@@ -88,7 +88,7 @@ export default function landing() {
           handler={handleAddToDo}
           modalValue={localTask}
           onChangeValue={setLocalTask}
-          // editOpen={editOpen}
+        // editOpen={editOpen}
         />
       ) : null}
     </div>
@@ -131,12 +131,11 @@ const HeaderComponent = () => {
 
 function TaskManipulator({ el, index, handleDeleteTodo }) {
   const [editing, setEditing] = useState(false);
-  const [editData, setEditData] = useState(el.task);
+  const [editData, setEditData] = useState({ ...el });
   const dispatch = useDispatch();
-
   // debugger;
   const handleEditTodo = () => {
-    let data = { id: el.id, value: editData };
+    let data = { id: el.id, task: editData.task, done: false };
     dispatch(editTask(data));
     console.log(el.id, editData, "Line 137");
   };
@@ -144,21 +143,24 @@ function TaskManipulator({ el, index, handleDeleteTodo }) {
   const handleEditChange = (e) => {
     // debugger;
     const { name, value } = e.target;
-    setEditData((field) => ({ ...field, [name]: value }));
+    // debugger;
+    setEditData((field) => {
+      // debugger;
+      return ({ ...field, [name]: value });
+    });
     handleEditTodo();
   };
 
   let todoManipulation;
   if (editing) {
-    console.log(editing, "Editing True");
     todoManipulation = (
       <>
         <input
           name="task"
-          value={el.task}
+          value={editData.task}
           onChange={handleEditChange}
-          // onChange={(e) => console.log(e.target.value, "Value 156")}
-          // onChange={(e) => handleEditTodo({ ...el.task, task: e.target.value })}
+        // onChange={(e) => console.log(e.target.value, "Value 156")}
+        // onChange={(e) => handleEditTodo({ ...el.task, task: e.target.value })}
         />
         <button onClick={() => handleEditTodo(false)}>
           <HiMiniArrowDownTray />
