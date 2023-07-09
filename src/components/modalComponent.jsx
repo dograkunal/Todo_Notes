@@ -6,7 +6,6 @@ export default function modalComponent({
   modalValue,
   onChangeValue,
 }) {
-  console.log(modalValue, "Value modal line 10");
   return (
     <div className="modalBase">
       <div className="addTaskModal" ref={ref}>
