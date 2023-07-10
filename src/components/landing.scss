@@ -47,13 +47,6 @@
       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
       z-index: 0;
 
-      .closeModal {
-        position: absolute;
-        top: 8%;
-        right: 8%;
-        width: 2px;
-        border: none;
-      }
       .taskModalHeading {
         color: #f8fefe;
         text-align: center;
@@ -154,14 +147,25 @@
 .inputContainer {
   display: flex;
   justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0px 3px;
   .inputBox {
     display: flex;
-    padding: 5% 10%;
+    padding: 5% 9%;
     color: #5d70ac;
     text-align: center;
     font-size: 18px;
     border: none;
     border-radius: 200px;
     background: #010f32;
+  }
+  button {
+    position: absolute;
+    background-color: transparent;
+    padding: 2px;
+    border-radius: 50%;
+    right: -16px;
+    color: white;
   }
 }

@@ -5,6 +5,10 @@ const initialState = {
     { id: 555, task: "Buy milk", done: false },
     { id: 444, task: "Have Whey", done: false },
   ],
+  notesCopy: [
+    { id: 555, task: "Buy milk", done: false },
+    { id: 444, task: "Have Whey", done: false },
+  ],
 };
 
 export const ToDoSlice = createSlice({
@@ -17,11 +21,12 @@ export const ToDoSlice = createSlice({
         notes: [
           ...state.notes,
           {
-            id: Math.floor(Math.random() * 1000),
-            task: action.payload,
+            id: action.payload.id,
+            task: action.payload.task,
             done: false,
           },
         ],
+        notesCopy: [...state.notes],
       };
     },
 
@@ -29,6 +34,7 @@ export const ToDoSlice = createSlice({
       return {
         ...state,
         notes: [...state.notes.filter((item) => item.id !== action.payload)],
+        notesCopy: [...state.notes],
       };
     },
 
@@ -42,10 +48,29 @@ export const ToDoSlice = createSlice({
       return {
         ...state,
         notes: updatedNotes,
+        notesCopy: updatedNotes,
       };
+    },
+
+    searchTask: (state, action) => {
+      if (action.payload.trim()) {
+        return {
+          ...state,
+          notes: [
+            ...state.notes.filter((item) =>
+              item.task.toLowerCase().includes(action.payload.toLowerCase())
+            ),
+          ],
+        };
+      } else {
+        return {
+          ...state,
+          notes: [...state.notesCopy],
+        };
+      }
     },
   },
 });
 
-export const { deleteTask, addTask, editTask } = ToDoSlice.actions;
+export const { deleteTask, addTask, editTask, searchTask } = ToDoSlice.actions;
 export default ToDoSlice.reducer;

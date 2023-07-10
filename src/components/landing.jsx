@@ -1,18 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
 import ModalComponent from "./modalComponent";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTask, addTask, editTask } from "./landingSlice";
+import { deleteTask, addTask, editTask, searchTask } from "./landingSlice";
 import Plus from "../assets/plus.png";
 import DoneIC from "../assets/Done.png";
 import DeleteIC from "../assets/Remove.png";
-import { HiOutlinePencil, HiMiniArrowDownTray } from "react-icons/hi2";
+import {
+  HiOutlinePencil,
+  HiMiniArrowDownTray,
+  HiOutlineMagnifyingGlass,
+} from "react-icons/hi2";
 
 import "./landing.scss";
 
 export default function landing() {
   const [isOpen, setIsopen] = useState(false);
-  const [editOpen, setEditOpen] = useState(false);
-  const [localTask, setLocalTask] = useState(" ");
+  const [localTask, setLocalTask] = useState({ id: 0, task: " " });
   const ref = useRef();
   const addref = useRef();
   const taskToDo = useSelector(
@@ -22,9 +25,6 @@ export default function landing() {
   const dispatch = useDispatch();
 
   const handleModal = () => {
-    if (editOpen) {
-      setIsopen(true);
-    }
     isOpen ? setIsopen(false) : setIsopen(true);
   };
 
@@ -68,8 +68,6 @@ export default function landing() {
       <TaskComponent
         taskToDo={taskToDo}
         handleDeleteTodo={handleDeleteTodo}
-        editOpen={editOpen}
-        setEditOpen={setEditOpen}
         handleModal={handleModal}
       />
 
@@ -93,13 +91,7 @@ export default function landing() {
   );
 }
 
-const TaskComponent = ({
-  taskToDo,
-  handleDeleteTodo,
-  setEditOpen,
-  handleModal,
-  editOpen,
-}) => {
+const TaskComponent = ({ taskToDo, handleDeleteTodo }) => {
   return (
     <div className="mainBody">
       {taskToDo &&
@@ -117,11 +109,30 @@ const TaskComponent = ({
 };
 
 const HeaderComponent = () => {
+  const [SearchValue, setSearchvalue] = useState(" ");
+  const dispatch = useDispatch();
+
+  const handleSearch = () => {
+    console.log(SearchValue);
+    dispatch(searchTask(SearchValue));
+    // const {value} = e.target;
+  };
+
   return (
     <div className="headerMain">
       <div className="headerFont">To-Do APP</div>
       <div className="inputContainer">
-        <input placeholder="Search Task" name="Search" className="inputBox" />
+        <input
+          placeholder="Search Task"
+          name="Search"
+          className="inputBox"
+          onChange={(e) => {
+            setSearchvalue(e.target.value);
+          }}
+        />
+        <button onClick={handleSearch}>
+          <HiOutlineMagnifyingGlass />
+        </button>
       </div>
     </div>
   );
@@ -166,6 +177,7 @@ function TaskManipulator({ el, index, handleDeleteTodo }) {
       </>
     );
   }
+
   return (
     <div className="taskDetail" key={el + index}>
       <div>

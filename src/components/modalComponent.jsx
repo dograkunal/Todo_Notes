@@ -6,6 +6,16 @@ export default function modalComponent({
   modalValue,
   onChangeValue,
 }) {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    onChangeValue(() => {
+      return {
+        [name]: value,
+        id: Math.floor(Math.random() * 1000),
+      };
+    });
+  };
+
   return (
     <div className="modalBase">
       <div className="addTaskModal" ref={ref}>
@@ -13,10 +23,10 @@ export default function modalComponent({
         <div className="inputContainer">
           <input
             className="inputBox"
-            name="Task"
-            value={modalValue}
+            name="task"
+            value={modalValue.task}
             onChange={(e) => {
-              onChangeValue(e.target.value);
+              handleChange(e);
             }}
           />
         </div>
