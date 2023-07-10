@@ -16,6 +16,7 @@ export const ToDoSlice = createSlice({
   initialState,
   reducers: {
     addTask: (state, action) => {
+      // console.log(current(notesCopy));
       return {
         ...state,
         notes: [
@@ -26,7 +27,14 @@ export const ToDoSlice = createSlice({
             done: false,
           },
         ],
-        notesCopy: [...state.notes],
+        notesCopy: [
+          ...state.notes,
+          {
+            id: action.payload.id,
+            task: action.payload.task,
+            done: false,
+          },
+        ],
       };
     },
 
@@ -34,7 +42,9 @@ export const ToDoSlice = createSlice({
       return {
         ...state,
         notes: [...state.notes.filter((item) => item.id !== action.payload)],
-        notesCopy: [...state.notes],
+        notesCopy: [
+          ...state.notes.filter((item) => item.id !== action.payload),
+        ],
       };
     },
 
@@ -53,6 +63,7 @@ export const ToDoSlice = createSlice({
     },
 
     searchTask: (state, action) => {
+      console.log(current(state.notesCopy));
       if (action.payload.trim()) {
         return {
           ...state,
