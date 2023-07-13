@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik } from "formik";
 import SignIn from "../../../../assets/SignIn.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { registerAction } from "./registerSlice";
 import * as yup from "yup";
 import "../index.scss";
 
 function Register() {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.register && state.register.token);
+  console.log(token, "Token");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [navigate, token]);
+
   return (
     <>
       <Formik
@@ -13,32 +26,27 @@ function Register() {
           firstName: "Jon",
           lastName: "Doe",
           email: "xyz@abc.com",
-          password: "123456",
+          password: "abc@123",
         }}
-        onSubmit={(values, { isSubmitting }) => {
+        onSubmit={(values, { setSubmitting }) => {
+          console.log(values, "Register values");
           dispatch(registerAction(values));
-          isSubmitting(false);
+          setSubmitting(false);
         }}
         validationSchema={yup.object().shape({
           firstName: yup
             .string()
             .matches(/^[a-zA-Z]+$/, "Only letters allowed")
-            .max(25, "Exceeding the word limit")
-            .required("Last name required!"),
+            .required("First name cannot be Empty!"),
           lastName: yup
             .string()
             .matches(/^[a-zA-Z]+$/, "Only letters allowed")
-            .max(25, "Exceeding the word limit")
-            .required("Last name required!"),
+            .required("Last name cannot be Empty!"),
 
-          email: yup
-            .string()
-            .email()
-            .max(50, "Sorry you exceeding the limit")
-            .required("Email is required"),
+          email: yup.string().email().required("Email is required"),
           password: yup
             .string()
-            .min(6, "At least 8 characters")
+            .min(6, "Should be 6 Character long")
             .matches(/[!@#$%^&*()-+]+/, "Password required special character")
             .required("Password is required"),
         })}

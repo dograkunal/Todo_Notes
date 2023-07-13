@@ -11,6 +11,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (request) => {
+    console.log(request, "From Interceptor");
     if (localStorage.getItem("token")) {
       request.headers.Authorization = localStorage.setItem("token");
     }

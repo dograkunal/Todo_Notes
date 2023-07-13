@@ -4,6 +4,7 @@ import axios from "../../../../utils/instance";
 export const loginAction = createAsyncThunk(
   "loginSlice/loginAction",
   async (loginDetails, thunkApi) => {
+    debugger;
     try {
       const response = await axios.post("/auth/login", loginDetails);
       if (response && response.data && response.token) {
@@ -21,15 +22,28 @@ export const loginAction = createAsyncThunk(
 export const LoginSlice = createSlice({
   name: "Login",
   initialState: {
-    email: "xyz@abc.com",
-    password: "123456",
+    user: {},
+    token: null,
+    isloading: false,
   },
   reducers: {
-    logInSuccess: (payload) => {
-      return payload;
+    logInSuccess: (state, payload) => {
+      debugger;
+      return {
+        ...state,
+        user: payload,
+        token: payload.token,
+        isloading: false,
+      };
     },
-    logInFailure: (err) => {
-      return err;
+    logInFailure: (state, err) => {
+      console.log(err);
+      return {
+        ...state,
+        user: {},
+        token: null,
+        isLoading: false,
+      };
     },
   },
 });

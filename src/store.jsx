@@ -5,8 +5,8 @@ import LoginReducer from "./views/components/Authentication/login/loginSlice";
 import RegisterReducer from "./views/components/Authentication/register/registerSlice";
 export default configureStore({
   reducer: {
-    counter: counterReducer,
-    ToDoTask: ToDoReducer,
+    // counter: counterReducer,
+    // ToDoTask: ToDoReducer,
     Login: LoginReducer,
     Register: RegisterReducer,
   },

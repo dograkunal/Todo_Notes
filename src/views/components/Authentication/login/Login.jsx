@@ -10,7 +10,6 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state && state.Login.token);
-  console.log(token);
 
   useEffect(() => {
     if (token) {
@@ -20,7 +19,7 @@ function Login() {
   return (
     <>
       <Formik
-        initialValues={{ email: "xyz@abc.com", password: "123456" }}
+        initialValues={{ email: "xyz@abc.com", password: "123@abc" }}
         validate={(values) => {
           const errors = {};
           if (!values.email) {
@@ -33,7 +32,7 @@ function Login() {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          // console.log(values, "login jsx");
+          console.log(values, "login jsx");
           dispatch(loginAction(values));
           setSubmitting(false);
         }}
@@ -46,36 +45,35 @@ function Login() {
           handleBlur,
           handleSubmit,
           isSubmitting,
-          /* and other goodies */
         }) => (
           <div className="loginFoundation">
             <img src={SignIn} />
             {/* <div className="TestClass"> */}
-            {/* <form onSubmit={handleSubmit}> */}
-            <div className="formContainer">
-              <input
-                type="email"
-                name="email"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.email}
-                placeholder="Email"
-              />
-              {errors.email && touched.email}
-              <input
-                type="password"
-                name="password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.password}
-                placeholder="Password"
-              />
-              {errors.password && touched.password}
-              <button type="submit" disabled={isSubmitting}>
-                Submit
-              </button>
-            </div>
-            {/* </form> */}
+            <form onSubmit={handleSubmit}>
+              <div className="formContainer">
+                <input
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                  placeholder="Email"
+                />
+                {errors.email && touched.email}
+                <input
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                  placeholder="Password"
+                />
+                {errors.password && touched.password}
+                <button type="submit" disabled={isSubmitting}>
+                  Submit
+                </button>
+              </div>
+            </form>
             {/* </div> */}
           </div>
         )}
