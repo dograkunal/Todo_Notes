@@ -1,7 +1,7 @@
-function InputCustom({}) {
+function InputCustom({ type, value, placeholder, name }) {
   return (
     <>
-      <input />
+      <input type={type} value={value} placeholder={placeholder} name={name} />
     </>
   );
 }

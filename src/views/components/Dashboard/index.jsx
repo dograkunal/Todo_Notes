@@ -7,7 +7,9 @@ import ButtonCustom from "./utility/ButtonCustom";
 function Dashboard() {
   const dispatch = useDispatch();
 
-  const list = useSelector((state) => state && state.TodoList);
+  const list = useSelector(
+    (state) => state && state.List && state.List.tasksList
+  );
   console.log(list, "from dahboard");
 
   useEffect(() => {

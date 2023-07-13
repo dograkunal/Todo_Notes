@@ -2,7 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "http://localhost:3333/api",
-  timeout: 7000,
+  timeout: 6000,
   headers: {
     "content-Type": "application/json",
     Accept: "application/json",
@@ -13,7 +13,7 @@ instance.interceptors.request.use(
   (request) => {
     console.log(request, "From Interceptor");
     if (localStorage.getItem("token")) {
-      request.headers.Authorization = localStorage.setItem("token");
+      request.headers.Authorization = localStorage.getItem("token");
     }
     return request;
   },

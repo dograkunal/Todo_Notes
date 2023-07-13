@@ -1,21 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../../../utils/instance";
-// import axios from "axios";
 
 export const getTask = createAsyncThunk(
   "listSlice/listAction",
-  //   async (_, thunkApi) => {
-  async () => {
+  async (_, thunkApi) => {
     try {
-      debugger;
       const response = await axios.get("/todo");
       if (response && response.data) {
         console.log(res, "Response from listslce");
-        // thunkApi.dispatch(getTaskSuccess(response.data));
+        thunkApi.dispatch(getTaskSuccess(response.data));
       }
     } catch (error) {
-      //   thunkApi.dispatch(getTaskFailure(error));
-      console.log(error, "Error in get task");
+      thunkApi.dispatch(getTaskFailure(error));
     }
   }
 );
