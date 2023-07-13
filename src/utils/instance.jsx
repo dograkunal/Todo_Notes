@@ -2,10 +2,10 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "http://localhost:3333/api",
-  timeout: 3000,
+  timeout: 7000,
   headers: {
-    Accept: "application/json",
     "content-Type": "application/json",
+    Accept: "application/json",
   },
 });
 
@@ -27,7 +27,7 @@ instance.interceptors.response.use(
     return response && response.data;
   },
   (error) => {
-    console.log(error.response);
+    console.log(error.response, "From interceptor");
     if (error.response.status === 400) {
       console.error("❌❌❌❌BAD REQUEST❌❌❌❌", error.response.data.message);
     }
