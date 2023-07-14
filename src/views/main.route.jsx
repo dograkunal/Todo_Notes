@@ -1,8 +1,8 @@
 import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import Login from "./components/Authentication/login/Login";
-import Register from "./components/Authentication/register/Register";
-import Dashboard from "./components/Dashboard";
+const Login = React.lazy(() => import("./components/Authentication/login/Login"));
+const Register = React.lazy(() => import("./components/Authentication/register/Register"));
+const Dashboard = React.lazy(() => import("./components/Dashboard"));
 import PublicRoute from "../utils/auth/PublicRoute";
 import PrivateRoute from "../utils/auth/PrivateRoute";
 import Loader from "../utils/Loader";

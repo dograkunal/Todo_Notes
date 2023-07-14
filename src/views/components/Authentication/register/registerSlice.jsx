@@ -3,13 +3,14 @@ import axios from "../../../../utils/instance";
 
 export const registerAction = createAsyncThunk(
   "RegisterSlice/RegisterAction",
-  async (RegisterDetails, thunkApi) => {
+  async ({ values: RegisterDetails, navigate }, thunkApi) => {
     // debugger;
     try {
       const response = await axios.post("/auth/register", RegisterDetails);
       if (response && response.data && response.token) {
         localStorage.setItem("token", `Bearer ${response.token}`);
         response.data.token = `${response.token}`;
+        navigate('/dashboard');
         thunkApi.dispatch(RegisterSuccess(response.data));
       }
     } catch (error) {

@@ -30,7 +30,7 @@ function Register() {
         }}
         onSubmit={(values, { setSubmitting }) => {
           // console.log(values, "Register values");
-          dispatch(registerAction(values));
+          dispatch(registerAction({ values, navigate }));
           setSubmitting(false);
         }}
         validationSchema={yup.object().shape({
