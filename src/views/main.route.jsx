@@ -32,7 +32,7 @@ function MainRoutes() {
         }
       />
       <Route
-        path="/dashboard"
+        path="/dashboard/*"
         element={
           <Suspense fallback={<Loader />}>
             <PrivateRoute>

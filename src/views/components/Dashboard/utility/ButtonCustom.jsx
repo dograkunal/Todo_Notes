@@ -1,7 +1,9 @@
-function ButtonCustom({ text, onClick }) {
+function ButtonCustom({ text, onClick, type }) {
   return (
     <>
-      <button onClick={onClick}>{text}</button>
+      <button type={type} onClick={onClick}>
+        {text}
+      </button>
     </>
   );
 }

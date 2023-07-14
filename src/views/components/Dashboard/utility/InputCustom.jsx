@@ -1,7 +1,15 @@
-function InputCustom({ type, value, placeholder, name }) {
+import React from "react";
+
+function InputCustom({ type, value, placeholder, name, onChange }) {
   return (
     <>
-      <input type={type} value={value} placeholder={placeholder} name={name} />
+      <input
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+      />
     </>
   );
 }

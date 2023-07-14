@@ -4,7 +4,7 @@ import axios from "../../../../utils/instance";
 export const loginAction = createAsyncThunk(
   "loginSlice/loginAction",
   async (loginDetails, thunkApi) => {
-    debugger;
+    // debugger;
     try {
       const response = await axios.post("/auth/login", loginDetails);
       if (response && response.data && response.token) {
@@ -28,7 +28,7 @@ export const LoginSlice = createSlice({
   },
   reducers: {
     logInSuccess: (state, payload) => {
-      debugger;
+      // debugger;
       return {
         ...state,
         user: payload,
@@ -37,7 +37,7 @@ export const LoginSlice = createSlice({
       };
     },
     logInFailure: (state, err) => {
-      console.log(err);
+      console.log(err, "Login Failed");
       return {
         ...state,
         user: {},

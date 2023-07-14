@@ -32,7 +32,7 @@ function Login() {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values, "login jsx");
+          // console.log(values, "login jsx");
           dispatch(loginAction(values));
           setSubmitting(false);
         }}

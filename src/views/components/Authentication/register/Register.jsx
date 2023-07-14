@@ -29,7 +29,7 @@ function Register() {
           password: "abc@123",
         }}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values, "Register values");
+          // console.log(values, "Register values");
           dispatch(registerAction(values));
           setSubmitting(false);
         }}

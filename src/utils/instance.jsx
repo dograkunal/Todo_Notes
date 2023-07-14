@@ -11,7 +11,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (request) => {
-    console.log(request, "From Interceptor");
+    // console.log(request, "From Interceptor");
     if (localStorage.getItem("token")) {
       request.headers.Authorization = localStorage.getItem("token");
     }
@@ -27,7 +27,6 @@ instance.interceptors.response.use(
     return response && response.data;
   },
   (error) => {
-    console.log(error.response, "From interceptor");
     if (error.response.status === 400) {
       console.error("❌❌❌❌BAD REQUEST❌❌❌❌", error.response.data.message);
     }
@@ -39,6 +38,11 @@ instance.interceptors.response.use(
     }
     if (error.response.status === 502) {
       console.error("❌❌❌❌BAD GATEWAY❌❌❌❌", error.response.data.message);
+    } else {
+      console.log(
+        error.response.data && error.response.data.error,
+        "👈🏼👈🏼From interceptor"
+      );
     }
     return Promise.reject(error);
   }

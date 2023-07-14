@@ -4,7 +4,7 @@ import axios from "../../../../utils/instance";
 export const registerAction = createAsyncThunk(
   "RegisterSlice/RegisterAction",
   async (RegisterDetails, thunkApi) => {
-    debugger;
+    // debugger;
     try {
       const response = await axios.post("/auth/register", RegisterDetails);
       if (response && response.data && response.token) {
@@ -14,7 +14,7 @@ export const registerAction = createAsyncThunk(
       }
     } catch (error) {
       thunkApi.dispatch(RegisterFailure(error));
-      console.error("Register Failed");
+      // console.error("Register Failed");
     }
   }
 );

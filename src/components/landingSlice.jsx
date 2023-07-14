@@ -63,7 +63,7 @@ export const ToDoSlice = createSlice({
     },
 
     searchTask: (state, action) => {
-      console.log(current(state.notesCopy));
+      // console.log(current(state.notesCopy));
       if (action.payload.trim()) {
         return {
           ...state,
